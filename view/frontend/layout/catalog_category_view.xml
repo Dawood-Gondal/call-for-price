@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.products.list">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">M2Commerce_CallForPrice::list.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="viewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="category.product.type.details.renderers.configurable">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">M2Commerce_CallForPrice::renderer.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="viewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

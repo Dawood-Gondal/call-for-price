@@ -1,0 +1,101 @@
+<?php
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+
+/** @var \Magento\Catalog\Block\Product\View $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php $_product = $block->getProduct(); ?>
+
+<?php if ($_product->getCallForPrice() == 1): ?>
+    <div class="actions-primary call-for-price-action">
+        <a href="javascript:void(0)" data-product-id="<?= $_product->getEntityId(); ?>" class="action primary call-for-price"><?= __('Call For Price') ?></a>
+    </div>
+<?php endif; ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+          action="<?= $escaper->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()) : ?> enctype="multipart/form-data"<?php endif; ?>>
+
+        <?php if ($_product->getCallForPrice() == 0):?>
+            <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>"/>
+            <input type="hidden" name="selected_configurable_option" value=""/>
+            <input type="hidden" name="related_product" id="related-products-field" value=""/>
+            <input type="hidden" name="item" value="<?= (int)$block->getRequest()->getParam('id') ?>"/>
+            <?= $block->getBlockHtml('formkey') ?>
+            <?= $block->getChildHtml('form_top') ?>
+        <?php endif; ?>
+
+        <?php if (!$block->hasOptions()) : ?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else : ?>
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') : ?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') : ?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif; ?>
+        <?= $block->getChildHtml('form_bottom') ?>
+    </form>
+</div>
+
+<!-- Call for price modal start -->
+<div class="call-for-price-modal">
+    <div class="alert-success" role="alert">
+        <?= __('Your request has been sent successfully!')?>
+    </div>
+    <label class="label" for="req_name">
+        <span><?= __('Name')?></span>
+        <span class="mandatory-field"> *</span>
+    </label>
+    <input name="name" id="req_name" title="req_name" class="input-text" type="text"/>
+    <div class="modal-error name-error">
+        <span class="modal-error-msg"><?= __('Name is required')?></span>
+    </div>
+    <label class="label" for="req_email">
+        <span><?= __('Email')?></span>
+        <span class="mandatory-field"> *</span>
+    </label>
+    <input name="req_email" id="req_email" title="req_email" class="input-text" type="email"/>
+    <div class="modal-error email-error">
+        <span class="modal-error-msg"><?= __('Email is required')?></span>
+    </div>
+    <div class="modalemail-error">
+        <span class="modal-error-msg"><?= __('Provide a valid email')?></span></div>
+    <label class="label" for="req_phone">
+        <span>Phone</span>
+        <span class="mandatory-field"> *</span>
+    </label>
+    <input name="phone" id="req_phone" title="req_phone" class="input-text" type="text"/>
+    <div class="modal-error phone-error">
+        <span class="modal-error-msg"><?= __('Phone is required')?></span>
+    </div>
+    <input name="product_id" id="product_id" title="product_id" class="input-text" type="text" hidden/>
+</div>
+<!-- Call for price modal end -->
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig":  <?= $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "M2Commerce_CallForPrice/js/call-for-price-modal" : {}
+        }
+    }
+</script>

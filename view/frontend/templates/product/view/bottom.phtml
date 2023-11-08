@@ -1,0 +1,17 @@
+<?php
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+
+/** @var \Magento\Catalog\Block\Product\View $block */
+?>
+<?php $_product = $block->getProduct(); ?>
+
+<?php if ($_product->getCallForPrice() == 0):?>
+    <div class="product-options-bottom">
+        <?= $block->getChildHtml('', true) ?>
+    </div>
+<?php endif; ?>

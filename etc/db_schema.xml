@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="m2c_call_for_price" resource="default" engine="innodb" comment="Call for Price">
+        <column xsi:type="int" name="id" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="int" name="product_id" nullable="false" comment="Product ID"/>
+        <column xsi:type="text" name="phone" nullable="true" comment="Phone"/>
+        <column xsi:type="text" name="email" nullable="false" comment="Email"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" comment="Updated At"/>
+         <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="CALL_FOR_PRICE_ID" indexType="btree">
+         		<column name="id"/>
+     	</index>
+     	<index referenceId="CALL_FOR_PRICE_NAME" indexType="fulltext">
+         		<column name="name"/>
+     	</index>
+
+    </table>
+</schema>

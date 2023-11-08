@@ -1,0 +1,20 @@
+{
+    "m2c_call_for_price": {
+        "column": {
+            "id": true,
+            "name": true,
+            "product_id": true,
+            "phone": true,
+            "email": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "CALL_FOR_PRICE_ID": true,
+            "CALL_FOR_PRICE_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

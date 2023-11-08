@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="TestGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="GridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">M2Commerce\CallForPrice\Model\Resource\Requester\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">TestGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="requester_grid_listing_data_source" xsi:type="string">M2Commerce\CallForPrice\Model\ResourceModel\Requester\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider">
+        <arguments>
+            <argument name="addFilterStrategies" xsi:type="array">
+                <item name="fulltext" xsi:type="object">Magento\CatalogSearch\Ui\DataProvider\Product\AddFulltextFilterToCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="M2Commerce\CallForPrice\Model\ResourceModel\Requester\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">m2c_call_for_price</argument>
+            <argument name="resourceModel" xsi:type="string">M2Commerce\CallForPrice\Model\ResourceModel\Requester</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="requester_grid_listing_data_source" xsi:type="string">M2Commerce\CallForPrice\Model\ResourceModel\Requester\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="M2Commerce\CallForPrice\Model\ResourceModel\Requester\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="requestergrid" xsi:type="string">requester_grid</argument>
+            <argument name="resourceModel" xsi:type="string">M2Commerce\CallForPrice\Model\ResourceModel\Requester</argument>
+        </arguments>
+    </virtualType>
+    <preference for="Magento\Catalog\Pricing\Render\FinalPriceBox" type="M2Commerce\CallForPrice\Pricing\Render\FinalPriceBox" />
+    <preference for="Magento\ConfigurableProduct\Pricing\Render\FinalPriceBox" type="M2Commerce\CallForPrice\Pricing\Render\FinalPriceBox" />
+</config>

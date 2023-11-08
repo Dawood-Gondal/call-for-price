@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    M2Commerce Enterprise
+ * @package     M2Commerce_CallForPrice
+ * @copyright   Copyright (c) 2023 M2Commerce Enterprise
+ * @author      dawoodgondaldev@gmail.com
+ */
+-->
+<config xmlns:xsi="//www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="M2Commerce_CallForPrice::callForPriceTitle"
+             title="Call For Price"
+             module="M2Commerce_CallForPrice"
+             translate="title"
+             sortOrder="60"
+             parent="Magento_Customer::customer"
+             resource="M2Commerce_CallForPrice::callForPriceTitle"/>
+        <add id="M2Commerce_CallForPrice::requester"
+             title="Requesters"
+             module="M2Commerce_CallForPrice"
+             sortOrder="61"
+             parent="M2Commerce_CallForPrice::callForPriceTitle"
+             action="m2cop/requester"
+             resource="M2Commerce_CallForPrice::requester"/>
+    </menu>
+</config>
