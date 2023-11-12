@@ -14,7 +14,7 @@
                 <argument name="template" xsi:type="string">M2Commerce_CallForPrice::list.phtml</argument>
             </action>
             <arguments>
-                <argument name="viewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
+                <argument name="callForPriceViewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
             </arguments>
         </referenceBlock>
         <referenceBlock name="category.product.type.details.renderers.configurable">
@@ -22,7 +22,7 @@
                 <argument name="template" xsi:type="string">M2Commerce_CallForPrice::renderer.phtml</argument>
             </action>
             <arguments>
-                <argument name="viewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
+                <argument name="callForPriceViewModel" xsi:type="object">M2Commerce\CallForPrice\ViewModel\ProductView</argument>
             </arguments>
         </referenceBlock>
     </body>

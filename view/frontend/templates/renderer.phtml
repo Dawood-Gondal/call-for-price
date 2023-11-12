@@ -12,11 +12,11 @@ use Magento\Swatches\ViewModel\Product\Renderer\Configurable as ConfigurableView
 
 /** @var Configurable $block */
 /** @var Product $product */
-/** @var $viewModel \M2Commerce\CallForPrice\ViewModel\ProductView  */
+/** @var $copViewModel \M2Commerce\CallForPrice\ViewModel\ProductView  */
 
 $product = $block->getProduct();
-$viewModel = $block->getData('viewModel');
-$productData = $viewModel->getProductData($product);
+$copViewModel = $block->getData('callForPriceViewModel');
+$productData = $copViewModel->getProductData($product);
 ?>
 <?php if ($productData->getData('call_for_price') == 0): ?>
     <?php if ($product && $product->isAvailable()): ?>

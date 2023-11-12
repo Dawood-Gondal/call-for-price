@@ -12,12 +12,12 @@ use Magento\Framework\App\ActionInterface;
 
 /** @var $block \Magento\Catalog\Block\Product\ListProduct */
 /** @var $escaper \Magento\Framework\Escaper  */
-/** @var $viewModel \M2Commerce\CallForPrice\ViewModel\ProductView  */
+/** @var $copViewModel \M2Commerce\CallForPrice\ViewModel\ProductView  */
 ?>
 <?php
 $_productCollection = $block->getLoadedProductCollection();
 $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
-$viewModel = $block->getData('viewModel');
+$copViewModel = $block->getData('callForPriceViewModel');
 ?>
 
 <?php if (!$_productCollection->count()) :?>
@@ -73,7 +73,7 @@ $viewModel = $block->getData('viewModel');
                                 </a>
                             </strong>
                             <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
-                            <?php $productData = $viewModel->getProductData($_product); ?>
+                            <?php $productData = $copViewModel->getProductData($_product); ?>
                             <?= $block->getProductPrice($_product) ?>
 
                             <?php if ($_product->isAvailable()) :?>
